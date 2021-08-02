@@ -18,6 +18,10 @@ locals {
         loadBalancer = {
           type               = var.master-lb-visibility == "Private" ? "Internal" : "Public"
           idleTimeoutSeconds = var.master-lb-idle-timeout
+        },
+        "iam" = {
+          allowContainerRegistry = true
+          legacy                 = false
         }
       }
       addons = [
