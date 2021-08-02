@@ -18,10 +18,6 @@ locals {
         loadBalancer = {
           type               = var.master-lb-visibility == "Private" ? "Internal" : "Public"
           idleTimeoutSeconds = var.master-lb-idle-timeout
-        },
-        "iam" = {
-          allowContainerRegistry = true
-          legacy                 = false
         }
       }
       addons = [
@@ -250,6 +246,10 @@ locals {
         taints                 = length(var.master-taints) > 0 ? var.master-taints : null
         subnets                = [az]
         hooks                  = length(var.master-hooks) > 0 ? var.master-hooks : null
+        iam                    = {
+          allowContainerRegistry = true
+          legacy                 = false
+        }
       }, length(var.master-additional-sgs) > 0 ? { additionalSecurityGroups = var.master-additional-sgs } : {})
     }
   ]
@@ -278,6 +278,10 @@ locals {
       taints                 = null
       subnets                = var.availability-zones
       hooks                  = length(var.bastion-hooks) > 0 ? var.bastion-hooks : null
+      iam                    = {
+        allowContainerRegistry = true
+        legacy                 = false
+      }
     }, length(var.bastion-additional-sgs) > 0 ? { additionalSecurityGroups = var.bastion-additional-sgs } : {})
   }]
   minion_spec = {
@@ -305,6 +309,10 @@ locals {
       taints                 = length(var.minion-taints) > 0 ? var.minion-taints : null
       subnets                = var.availability-zones
       hooks                  = length(var.minion-hooks) > 0 ? var.minion-hooks : null
+      iam                    = {
+        allowContainerRegistry = true
+        legacy                 = false
+      }
     }, length(var.minion-additional-sgs) > 0 ? { additionalSecurityGroups = var.minion-additional-sgs } : {})
   }
 }
