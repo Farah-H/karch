@@ -57,6 +57,7 @@ locals {
           }
         } : {})
       ]
+      iam      = var.iam
       keyStore = "s3://${var.kops-state-bucket}/${var.cluster-name}/pki"
       kubeAPIServer = merge({
         insecureBindAddress          = "127.0.0.1"

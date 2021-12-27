@@ -852,3 +852,15 @@ variable "docker-auth-creds" {
   description = "Credentials for Docker repositories indexed by repository hostname"
   default     = {}
 }
+
+variable "iam" {
+  type = object({
+    allowContainerRegistry = bool
+    legacy                 = bool
+  })
+  description = "IAM settings for the cluster"
+  default = {
+    allowContainerRegistry = true
+    legacy                 = false
+  }
+}
