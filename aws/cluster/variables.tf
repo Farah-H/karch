@@ -896,8 +896,10 @@ variable "aws-load-balancer-controller" {
 variable "cert-manager" {
   type = object({
     enabled = bool
+    image   = string
   })
   default = {
     enabled = false
+    image   = null
   }
 }
